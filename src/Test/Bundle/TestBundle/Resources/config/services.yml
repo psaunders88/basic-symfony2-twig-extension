@@ -1,0 +1,12 @@
+services:
+    # The twig extension
+    test.twig.test_extension:
+        class: Test\Bundle\TestBundle\Twig\TestExtension
+        arguments: ["@test.listener.mode_listener"]
+        tags:
+            - { name: twig.extension }
+    # The listner for setting the site mode on kernel.request
+    test.listener.mode_listener:
+        class: Test\Bundle\TestBundle\Listeners\ModeListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: setMode }
